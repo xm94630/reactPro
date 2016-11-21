@@ -13,7 +13,7 @@
     "watchify": "^3.7.0"
   },
   "scripts": {
-    "build": "browserify ./index.js -t babelify -o bundle.js",
-    "start": "watchify ./index.js -v -t babelify -o bundle.js"
+    "build": "browserify ./public/js/index.js -t babelify -o ./public/bundle.js",
+    "start": "watchify ./public/js/index.js -v -t babelify -o ./public/bundle.js"
   }
 }
