@@ -5,7 +5,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-//模块1：一个常量
+/*//模块1：一个常量
 import {module1} from './myModule1.js'
 import {module1 as zhangsan} from './myModule1.js';//别名的写法
 l(module1)
@@ -40,53 +40,15 @@ import {ji,foo} from './myModule9.js'
 l(ji,foo)
 //这里获取全部的导出，在myModule9对象中！另外它有个私有属性__esModule
 import * as myModule9 from './myModule9.js'
-l(myModule9)  
+l(myModule9) */ 
 
 
 //import这个方法只有es6才得到支持，目前在node中都是不支持的。
 //当然在我们这里使用是没有问题的。
 //import ReactDOM from'react-dom';
+import bee from './bee.js'
 
-
-var bee = (function(bee){
-  
-  /*
-   * 实例1:简单的开始
-   */
-  bee.caseA1 = function(){
-
-    var ExampleApplication = React.createClass({
-      render: function() {
-        var elapsed = Math.round(this.props.elapsed  / 100);
-        var seconds = elapsed / 10 + (elapsed % 10 ? '' : '.0' );
-        var message =
-          '记录时间开始2===>' + seconds;
-
-        return <p>{message}</p>;
-      }
-    });
-    var start = new Date().getTime();
-    setInterval(function() {
-      ReactDOM.render(
-        <ExampleApplication elapsed={new Date().getTime() - start} />,
-        document.getElementById('container')
-      );
-    }, 50);
-  }
-
-
-  /*
-   * 实例2:
-   */
-  bee.caseA2 = function(){
-  }
-
-
-
-  return bee;
-})(bee||{});
-
-bee.caseA1();
+//bee.caseA1();
 
 
 

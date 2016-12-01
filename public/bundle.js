@@ -20428,86 +20428,11 @@ module.exports = traverseAllChildren;
 module.exports = require('./lib/React');
 
 },{"./lib/React":155}],178:[function(require,module,exports){
-/***********************************
- * react 启程
- ***********************************/
 'use strict';
 
-var _myModule = require('./myModule1.js');
-
-var _myModule2 = require('./myModule2.js');
-
-var _myModule3 = require('./myModule3.js');
-
-var _myModule4 = require('./myModule4.js');
-
-var _myModule5 = require('./myModule5.js');
-
-var _myModule6 = _interopRequireDefault(_myModule5);
-
-var _myModule7 = require('./myModule6.js');
-
-var _myModule8 = _interopRequireDefault(_myModule7);
-
-var _myModule9 = require('./myModule7.js');
-
-var _myModule10 = _interopRequireDefault(_myModule9);
-
-var _myModule11 = require('./myModule8.js');
-
-var _myModule12 = _interopRequireDefault(_myModule11);
-
-var _myModule13 = require('./myModule9.js');
-
-var myModule9 = _interopRequireWildcard(_myModule13);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var React = require('react');
-var ReactDOM = require('react-dom');
-
-//模块1：一个常量
-//别名的写法
-l(_myModule.module1);
-l(_myModule.module1);
-//模块2：一个对象
-
-l(_myModule2.module2);
-//模块3：多个
-
-l(_myModule3.mini1, _myModule3.mini2, _myModule3.mini3);
-//模块4：as
-
-l(_myModule4.cat);
-//模块5：default 这种情况下可以随便命名，大括号也不是必须的
-
-l(_myModule6.default);
-//模块6：利用其他模块，间接使用模块1
-
-l(_myModule8.default);
-//模块7：混合
-
-l(_myModule10.default);
-l(_myModule9.tree);
-//模块8：default
-
-l(_myModule12.default);
-//模块9：综合
-
-l(myModule9.default);
-
-l(_myModule13.ji, _myModule13.foo);
-//这里获取全部的导出，在myModule9对象中！另外它有个私有属性__esModule
-
-l(myModule9);
-
-//import这个方法只有es6才得到支持，目前在node中都是不支持的。
-//当然在我们这里使用是没有问题的。
-//import ReactDOM from'react-dom';
-
-
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 var bee = function (bee) {
 
   /*
@@ -20544,125 +20469,65 @@ var bee = function (bee) {
   return bee;
 }(bee || {});
 
-bee.caseA1();
+exports.default = bee;
 
-},{"./myModule1.js":179,"./myModule2.js":180,"./myModule3.js":181,"./myModule4.js":182,"./myModule5.js":183,"./myModule6.js":184,"./myModule7.js":185,"./myModule8.js":186,"./myModule9.js":187,"react":177,"react-dom":26}],179:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//模块1
-//这个非常简单，导出一个常量
-var module1 = 123;
-//需要注意的是导出的时候需要加一对大括号
-exports.module1 = module1;
-
-},{}],180:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//模块2
-var module2 = { a: 1, b: 2 };
-exports.module2 = module2;
-
-},{}],181:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//模块3:导出多个
-var mini1 = { a: 123 };
-var mini2 = { b: 123 };
-var mini3 = { c: 123 };
-exports.mini1 = mini1;
-exports.mini2 = mini2;
-exports.mini3 = mini3;
-
-},{}],182:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//模块4:as 重命名
-var dog = { dog: 123 };
-//前者是旧的名字，后者是新的名字
-exports.cat = dog;
-
-},{}],183:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//模块5:default
-var bird = { lala: 123 };
-exports.default = bird;
-
-},{}],184:[function(require,module,exports){
+},{}],179:[function(require,module,exports){
+/***********************************
+ * react 启程
+ ***********************************/
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _bee = require('./bee.js');
 
-var _myModule = require('./myModule1.js');
+var _bee2 = _interopRequireDefault(_bee);
 
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _myModule.module1;
-  }
-});
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./myModule1.js":179}],185:[function(require,module,exports){
-"use strict";
+var React = require('react');
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//模块7:混合
 
-var fish = {
-  width: 100,
-  height: 50
-};
-var tree = {
-  height: 20
-};
-exports.default = fish;
-exports.tree = tree;
+//bee.caseA1();
+var ReactDOM = require('react-dom');
 
-},{}],186:[function(require,module,exports){
-'use strict';
+/*//模块1：一个常量
+import {module1} from './myModule1.js'
+import {module1 as zhangsan} from './myModule1.js';//别名的写法
+l(module1)
+l(zhangsan)
+//模块2：一个对象
+import {module2} from './myModule2.js'
+l(module2)
+//模块3：多个
+import {mini1,mini2,mini3} from './myModule3.js'
+l(mini1,mini2,mini3)
+//模块4：as
+import {cat} from './myModule4.js'
+l(cat)
+//模块5：default 这种情况下可以随便命名，大括号也不是必须的
+import xxx from './myModule5.js'
+l(xxx)
+//模块6：利用其他模块，间接使用模块1
+import yyy from './myModule6.js'
+l(yyy)
+//模块7：混合
+import lala from './myModule7.js'
+import {tree} from './myModule7.js'
+l(lala)
+l(tree)
+//模块8：default
+import jj2 from './myModule8.js'
+l(jj2)
+//模块9：综合
+import x from './myModule9.js'
+l(x)
+import {ji,foo} from './myModule9.js'
+l(ji,foo)
+//这里获取全部的导出，在myModule9对象中！另外它有个私有属性__esModule
+import * as myModule9 from './myModule9.js'
+l(myModule9) */
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//模块8:default 导出一个的时候还尅这样子写
-var jj = { name: 'jj' };
-exports.default = jj;
+//import这个方法只有es6才得到支持，目前在node中都是不支持的。
+//当然在我们这里使用是没有问题的。
+//import ReactDOM from'react-dom';
 
-},{}],187:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = bar;
-exports.foo = foo;
-//模块9:综合
-var xiaoji = { name: 'xiaoji' };
-function bar() {
-  alert(123);
-};
-function foo() {
-  alert(222);
-};
-exports.ji = xiaoji;
-
-},{}]},{},[178]);
+},{"./bee.js":178,"react":177,"react-dom":26}]},{},[179]);
