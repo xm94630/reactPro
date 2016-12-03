@@ -1,9 +1,6 @@
 /***********************************
  * react 启程
  ***********************************/
-'use strict';
-var React = require('react');
-var ReactDOM = require('react-dom');
 
 /*//模块1：一个常量
 import {module1} from './myModule1.js'
@@ -43,12 +40,8 @@ import * as myModule9 from './myModule9.js'
 l(myModule9) */ 
 
 
-//import这个方法只有es6才得到支持，目前在node中都是不支持的。
-//当然在我们这里使用是没有问题的。
-//import ReactDOM from'react-dom';
 import bee from './bee.js'
-
-//bee.caseA1();
+bee.caseA2();
 
 
 
