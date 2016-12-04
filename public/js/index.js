@@ -41,7 +41,7 @@ l(myModule9) */
 
 
 import bee from './bee.js'
-bee.caseA2();
+bee.caseA7();
 
 
 
