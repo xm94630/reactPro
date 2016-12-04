@@ -20712,6 +20712,73 @@ var bee = function (bee) {
     ReactDOM.render(React.createElement(Fish, { onChange: this.myFun }), document.getElementById('container'));
   };
 
+  /*
+   * 实例8: react 结合 WebComponent
+   * 目前谷歌浏览器就是支持这个 WebComponent，没有额外的插件
+   */
+  bee.caseA8 = function () {
+
+    // 定义 WebComponent
+    // 
+    // attachedCallback : 是向文档中插入时候用到的回调方法
+    // createdCallback  : 元素创建后调用
+    // detachedCallback : 从文档中移除元素后调用
+    // 
+    // 我特意研究了 Object.create 才看懂这个。
+    // 第二个参数是要符合属性配置的写法，这里的意思是：
+    // 最后返回的例子，会新增一个 attachedCallback 的方法，方法的内容就是value对应的那个。
+    // attachedCallback上面已经解释了~
+
+    var proto = Object.create(HTMLElement.prototype, {
+      attachedCallback: {
+        value: function value() {
+          var mountPoint = document.createElement('span');
+          this.createShadowRoot().appendChild(mountPoint);
+
+          //原来例子中的代码是用下面的react再次渲染
+          //我在理解了这个例子之后，就写了这个~~ 没有问题哈，说明已经掌握！！
+          mountPoint.innerHTML = '啊哈哈~~';
+          //在这里再次使用了react渲染
+          /*var name = this.getAttribute('name');
+          var url = 'https://www.baidu.com/s?wd=' + name;
+          ReactDOM.render(<a href={url}>{name}</a>, mountPoint);*/
+        }
+      }
+    });
+    //使用之前要注册了才能用哦~~
+    document.registerElement('my-fish', { prototype: proto });
+
+    //这部分是我已经非常熟悉的react的写法
+    //不同是，这里渲染的时候使用了 WebComponent 定义的标签 my-fish
+    //需要注意的是 my-fish 的命名格式必须是“xxx-xxx”这样子的写法
+
+    var Fish = function (_React$Component3) {
+      _inherits(Fish, _React$Component3);
+
+      function Fish() {
+        _classCallCheck(this, Fish);
+
+        return _possibleConstructorReturn(this, (Fish.__proto__ || Object.getPrototypeOf(Fish)).apply(this, arguments));
+      }
+
+      _createClass(Fish, [{
+        key: 'render',
+        value: function render() {
+          return React.createElement(
+            'div',
+            null,
+            '\u6211\u662F\uFF1A',
+            React.createElement('my-fish', { name: this.props.name })
+          );
+        }
+      }]);
+
+      return Fish;
+    }(React.Component);
+
+    ReactDOM.render(React.createElement(Fish, { name: '\u5C0F\u9C7C' }), document.getElementById('container'));
+  };
+
   return bee;
 }(bee || {});
 
@@ -20726,7 +20793,7 @@ var _bee2 = _interopRequireDefault(_bee);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_bee2.default.caseA7(); /***********************************
+_bee2.default.caseA8(); /***********************************
                          * react 启程
                          ***********************************/
 
