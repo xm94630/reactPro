@@ -1,6 +1,8 @@
 'use strict';
 var React = require('react');
 var ReactDOM = require('react-dom');
+var addons = require('react-addons');
+var cssTransitionGroup = require('react-addons-css-transition-group');
 //import这个方法只有es6才得到支持，目前在node中都是不支持的。
 //当然在我们这里使用是没有问题的。
 //import ReactDOM from'react-dom';
@@ -293,6 +295,88 @@ var bee = (function(bee){
 
   }
 
+
+  /*
+   * 实例9:  react-addons-css-transition-group 插件
+   * 如果在浏览器中要使用 CSSTransitionGroup 这个类的话，必须引入 react-addon.js
+   * 然而在我这个node的环境中需要引入的是 react-addons-css-transition-group 插件
+   * 当然node中也有一个名字为react-addon，在使用CSSTransitionGroup的时候视乎是有问题的
+   *
+   * 这个文件还需要配合 transition.css 这个样式哦
+   * 所以这个例子还涉及到css动画的的知识，看来也是我的弱点哟
+   *
+   * 其实这个里也是 “组件嵌套使用” 的一个很好的例子。
+   * 外层的组件是 Fish , 内层的组件是 CSSTransitionGroup
+   *
+   * 另外，从视觉效果上来看，好像产生了很多的实例，但是，其实就是就是通过定时器，每次都渲染出3个div（被应用了动画）
+   * 第二次渲染的时候，同样道理。所以并没有
+   */
+  bee.caseA9 = function(){
+
+    //cssTransitionGroup是node已经进入的一个插件。
+    //它就像是react中默认定义好的一个“类”，直接可以为我们使用。
+    //就好像我这里的“Fish”是同样的概念。
+    var CSSTransitionGroup = cssTransitionGroup;
+
+    var INTERVAL = 5000;
+
+    var Fish = React.createClass({
+      getInitialState: function() {
+        return {current: 0};
+      },
+
+      //组件被添加的时候触发的回调
+      componentDidMount: function() {
+        this.interval = setInterval(this.tick, INTERVAL);
+      },
+
+      //组件被移除的时候触发的回调
+      componentWillUnmount: function() {
+        clearInterval(this.interval);
+      },
+
+      tick: function() {
+        this.setState({current: this.state.current + 1});
+      },
+
+      render: function() {
+        var children = [];
+        var pos = 0;
+        var colors = ['#3F92D2', '#FF9200', '#FFC373'];
+        for (var i = this.state.current; i < this.state.current + colors.length; i++) {
+          var style = {
+            left: pos * 100,
+            background: colors[i % colors.length]
+          };
+          pos++;
+          //children这个数组中每次会保存三个dom元素
+          children.push(<div key={i} className="animateItem" style={style}>{i}</div>);
+        }
+        return (
+          //CSSTransitionGroup本身是没有刷新的，我想当子类组件给他传递值的时候，就会接受到事件。
+          //它处理元素的速度要和内部的定时器保持一致，否则的话会出现页面中元素越来越多的情况。
+          <CSSTransitionGroup
+            className="animateExample"
+            transitionEnterTimeout={5000}
+            transitionLeaveTimeout={5000}
+            transitionName="example">
+            {children}
+          </CSSTransitionGroup>
+        );
+      }
+    });
+
+    ReactDOM.render(
+      <Fish />,
+      document.getElementById('container')
+    );
+
+
+    /*
+     * 这个例子略有难度，我先按下不表。
+     */
+
+  }
 
 
 

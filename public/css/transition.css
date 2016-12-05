@@ -1,0 +1,45 @@
+.example-enter,
+.example-leave {
+  -webkit-transition: all .25s;
+  transition: all .25s;
+}
+
+.example-enter,
+.example-leave.example-leave-active {
+  opacity: 0.01;
+}
+
+.example-leave.example-leave-active {
+  margin-left: -100px;
+}
+
+.example-enter {
+  margin-left: 100px;
+}
+
+.example-enter.example-enter-active,
+.example-leave {
+  margin-left: 0;
+  opacity: 1;
+}
+
+
+.animateExample {
+  display: block;
+  height: 100px;
+  position: relative;
+  width: 300px;
+}
+
+.animateItem {
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  height: 100px;
+  line-height: 100px;
+  position: absolute;
+  text-align: center;
+  -webkit-transition: all .25s; /* TODO: make this a move animation */
+  transition: all .25s; /* TODO: make this a move animation */
+  width: 100px;
+}

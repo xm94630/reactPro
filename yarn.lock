@@ -1893,6 +1893,14 @@ rc@~1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~1.0.4"
 
+react-addons:
+  version "0.9.1-deprecated"
+  resolved "http://registry.npm.taobao.org/react-addons/download/react-addons-0.9.1-deprecated.tgz#24131877d87076c1288fd2569b4b618614dccaf6"
+
+react-addons-css-transition-group:
+  version "15.4.1"
+  resolved "http://registry.npm.taobao.org/react-addons-css-transition-group/download/react-addons-css-transition-group-15.4.1.tgz#60b133fac5116e4009e56ab0674dc2ddcc1a18f6"
+
 react-dom@^15.0.2:
   version "15.4.0"
   resolved "http://registry.npm.taobao.org/react-dom/download/react-dom-15.4.0.tgz#6a97a69000966570db48c746bc4b7b0ca50d1534"
