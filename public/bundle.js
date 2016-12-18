@@ -22536,13 +22536,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-
-//这是案例9需要使用的插件。
-var cssTransitionGroup = require('react-addons-css-transition-group');
-
 //import这个方法只有es6才得到支持，目前在node中都是不支持的。
 //当然在我们这里使用是没有问题的。
 //import ReactDOM from'react-dom';
+
+//这是案例9需要使用的插件。
+var cssTransitionGroup = require('react-addons-css-transition-group');
 
 var bee = function (bee) {
 
@@ -23025,6 +23024,46 @@ var bee = function (bee) {
 exports.default = bee;
 
 },{"mockschema":25,"react":191,"react-addons-css-transition-group":28,"react-dom":29}],194:[function(require,module,exports){
+"use strict";
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/*
+ * 之前的 bee.js 和 bee2.js 都是用es6的形式写的
+ * 我这里采用兼容amd\commonJS\window 的形式来写。
+ * 另外，下面这种写法，因为在复合成一个整体的好处是，所有的局部变量都被
+ * 放置到一个闭包中，非常干净利索。
+ */
+
+;(function (root, factory) {
+  if (typeof define === "function" && define.amd) {
+    define([], factory());
+  } else if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === "object") {
+    module.exports = factory();
+  } else {
+    root.MockSchema = factory();
+  }
+})(undefined, function () {
+
+  'use strict';
+
+  var React = require('react');
+  var ReactDOM = require('react-dom');
+
+  var bee = function (bee) {
+
+    /*
+     * 实例1:案例
+     */
+    bee.caseA1 = function () {};
+
+    return bee;
+  }(bee || {});
+
+  return bee;
+});
+
+},{"react":191,"react-dom":29}],195:[function(require,module,exports){
 'use strict';
 
 var _bee = require('./bee.js');
@@ -23035,9 +23074,21 @@ var _bee3 = require('./bee2.js');
 
 var _bee4 = _interopRequireDefault(_bee3);
 
+var _bee5 = require('./bee3.js');
+
+var _bee6 = _interopRequireDefault(_bee5);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//var bee3 = require('./bee3');
+
 //bee.caseA9();
+//bee2.caseA1();
+l(_bee6.default);
+
+//对于commonJS的模块也是可以用 es6 的方法进行引入。(只能用相当于模块中用es6 中的 export default)
+//因此不用{}的这种形式。
+//这个特性，不知道是es6原生就支持的，还是说，因为 browserify 的功劳！
 /***********************************
  * react 启程
  ***********************************/
@@ -23079,6 +23130,4 @@ l(ji,foo)
 import * as myModule9 from './myModule9.js'
 l(myModule9) */
 
-_bee4.default.caseA1();
-
-},{"./bee.js":192,"./bee2.js":193}]},{},[194]);
+},{"./bee.js":192,"./bee2.js":193,"./bee3.js":194}]},{},[195]);
