@@ -42,8 +42,16 @@ l(myModule9) */
 
 import bee  from './bee.js';
 import bee2 from './bee2.js';
+
+//对于commonJS的模块也是可以用 es6 的方法进行引入。(只能用相当于模块中用es6 中的 export default)
+//因此不用{}的这种形式。
+//这个特性，不知道是es6原生就支持的，还是说，因为 browserify 的功劳！
+import bee3 from './bee3.js';
+//var bee3 = require('./bee3');
+
 //bee.caseA9();
-bee2.caseA1();
+//bee2.caseA1();
+l(bee3);
 
 
 
