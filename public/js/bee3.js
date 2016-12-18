@@ -7,13 +7,13 @@
 
 ;(function (root, factory) {
   if (typeof define === "function" && define.amd) {
-    define([], factory());
+    define([], factory);
   } else if (typeof exports === "object") {
-    module.exports = factory();
+    module.exports = factory;
   } else {
-    root.MockSchema = factory();
+    root.MockSchema = factory;
   }
-}(this,function(){
+}(this,function(global){
 
   'use strict';
   var React = require('react');
@@ -34,6 +34,6 @@
 
   return bee;
 
-}));
+}(this)));
 
 

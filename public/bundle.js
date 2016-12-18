@@ -23045,13 +23045,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 ;(function (root, factory) {
   if (typeof define === "function" && define.amd) {
-    define([], factory());
+    define([], factory);
   } else if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === "object") {
-    module.exports = factory();
+    module.exports = factory;
   } else {
-    root.MockSchema = factory();
+    root.MockSchema = factory;
   }
-})(undefined, function () {
+})(undefined, function (global) {
 
   'use strict';
 
@@ -23069,7 +23069,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   }(bee || {});
 
   return bee;
-});
+}(undefined));
 
 },{"react":191,"react-dom":29}],195:[function(require,module,exports){
 'use strict';
