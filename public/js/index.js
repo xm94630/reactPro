@@ -40,8 +40,10 @@ import * as myModule9 from './myModule9.js'
 l(myModule9) */ 
 
 
-import bee from './bee.js'
-bee.caseA9();
+import bee  from './bee.js';
+import bee2 from './bee2.js';
+//bee.caseA9();
+bee2.caseA1();
 
 
 
