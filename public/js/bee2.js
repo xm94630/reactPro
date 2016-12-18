@@ -25,6 +25,8 @@ var bee = (function(bee){
    * 上周的时候我自己已经掌握了npm插件的编写
    * 否则的话，这个案例正好供我写一个简单的插件来学习。
    * 源码还不到100行呢。
+   * 不过里面出现了一个比较新鲜的玩样，是es6的 Object.assign
+   * 我会在接下来的案例中学习。
    */
   bee.caseA1 = function(){
 
@@ -44,6 +46,13 @@ var bee = (function(bee){
     l(arr);
   }
 
+  /*
+   * 实例1: Object.assign
+   * es6的 Object.assign
+   */
+  bee.caseA2 = function(){
+
+  }
 
 
 
