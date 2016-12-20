@@ -22973,6 +22973,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _mockschema = require('mockschema');
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var React = require('react');
 var ReactDOM = require('react-dom');
 
@@ -23021,10 +23023,111 @@ var bee = function (bee) {
   };
 
   /*
-   * 实例1: Object.assign
-   * es6的 Object.assign
+   * 实例2: Object.assign (es6)
    */
-  bee.caseA2 = function () {};
+  bee.caseA2 = function () {
+
+    //这个用法类似于“$.extend”进行扩展
+    //这里第一个参数作为源对象，后面的参数依次对其进行扩展。最后返回扩展后的源对象。
+    //对象中有相同的字段的时候，后面的覆盖前面的！
+    var obj = { a: 1 };
+    var result = Object.assign(obj, { a: { b: 123 } }, { c: 999 });
+    l(obj);
+    l(result);
+    l(obj == result);
+
+    //从这个例子中可以看出来，其实这个不适合深度复制的。
+    //也就是，他仅仅对于第一个层级进行了处理。
+    var b = { b: 1 };
+    var a = { a: b };
+    var c = Object.assign({}, a);
+    l(c);
+    b.b = 123456;
+    l(c);
+
+    var o2 = _defineProperty({}, Symbol("foo"), 2);
+    l(o2);
+  };
+
+  /*
+   * 实例3: Object.assign 的高级用法
+   */
+  bee.caseA3 = function () {
+
+    //继承属性和不可枚举属性是不能拷贝的
+    var obj = Object.create({ foo: 1 }, { // foo 是个继承属性。
+      bar: {
+        value: 2 // bar 是个不可枚举属性。
+      },
+      baz: {
+        value: 3,
+        enumerable: true // baz 是个自身可枚举属性。
+      }
+    });
+
+    var copy = Object.assign({}, obj);
+    console.log(copy); // { baz: 3 }
+
+    //默认一个普通的对象的属性是不可以枚举的。
+    l(Object.prototype.propertyIsEnumerable({ a: 1 }.a));
+
+    //这里例子中的a属性是不可以枚举的，为何也是可以的。
+    //和 上面的Object.create 的区别在于：
+    //那个obj中的属性是在原型上的。
+    //这里的是直接在对象自身就有的。
+    //也就是准确的来说：原型的可枚举的属性，也能被 Object.assign 生效！！
+    l(Object.assign({}, { a: 123 }));
+  };
+
+  /*
+   * 实例4: Symbol 数据类型
+   * Symbol 的文档也有不少内容，看着头痛。其实只要知道一点就好了：
+   * 就是他作为唯一标示用的。常常作为对象的key来使用的。类似于：
+   * {'456342374295424623647':123}
+   */
+  bee.caseA4 = function () {
+    var a = Symbol("foo");
+    var b = _defineProperty({}, Symbol("foo"), 123);
+    l(a);
+    l(b);
+    //唯一性，不和任何的值相等
+    l(Symbol("foo") == Symbol("foo"));
+  };
+
+  /*
+   * 实例5: Reflect.ownKeys 
+   */
+  bee.caseA5 = function () {
+    function Fish() {
+      this.age = 123;
+    }
+    Fish.prototype.type = 'fish';
+    var fish = new Fish();
+    var obj = Object.create(fish);
+    l(fish);
+    l(obj);
+    obj[Symbol('xxx')] = 123;
+    //Reflect.ownKeys 可以获取对象自己的key值(包含Symbol类型的)，不包括原型上的
+    l(Reflect.ownKeys(obj));
+  };
+
+  /*
+   * 实例6: Object.getOwnPropertySymbols 
+   * 获取对象自己的symbol属性，不会把普通的字段显示出来
+   */
+  bee.caseA6 = function () {
+    var obj = {
+      name: 'lala'
+    };
+    obj[Symbol('yy')] = 'haha';
+    l(Object.getOwnPropertySymbols(obj));
+  };
+
+  /*
+   * 实例7:
+   */
+  bee.caseA7 = function () {};
+  bee.caseA7();
 
   return bee;
 }(bee || {});
@@ -23087,55 +23190,5 @@ var _bee5 = require('./bee3.js');
 var _bee6 = _interopRequireDefault(_bee5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//var bee3 = require('./bee3');
-
-//bee.caseA9();
-//bee2.caseA1();
-l(_bee6.default);
-
-//对于commonJS的模块也是可以用 es6 的方法进行引入。(只能用相当于模块中用es6 中的 export default)
-//因此不用{}的这种形式。
-//这个特性，不知道是es6原生就支持的，还是说，因为 browserify 的功劳！
-/***********************************
- * react 启程
- ***********************************/
-
-/*//模块1：一个常量
-import {module1} from './myModule1.js'
-import {module1 as zhangsan} from './myModule1.js';//别名的写法
-l(module1)
-l(zhangsan)
-//模块2：一个对象
-import {module2} from './myModule2.js'
-l(module2)
-//模块3：多个
-import {mini1,mini2,mini3} from './myModule3.js'
-l(mini1,mini2,mini3)
-//模块4：as
-import {cat} from './myModule4.js'
-l(cat)
-//模块5：default 这种情况下可以随便命名，大括号也不是必须的
-import xxx from './myModule5.js'
-l(xxx)
-//模块6：利用其他模块，间接使用模块1
-import yyy from './myModule6.js'
-l(yyy)
-//模块7：混合
-import lala from './myModule7.js'
-import {tree} from './myModule7.js'
-l(lala)
-l(tree)
-//模块8：default
-import jj2 from './myModule8.js'
-l(jj2)
-//模块9：综合
-import x from './myModule9.js'
-l(x)
-import {ji,foo} from './myModule9.js'
-l(ji,foo)
-//这里获取全部的导出，在myModule9对象中！另外它有个私有属性__esModule
-import * as myModule9 from './myModule9.js'
-l(myModule9) */
 
 },{"./bee.js":192,"./bee2.js":193,"./bee3.js":194}]},{},[195]);

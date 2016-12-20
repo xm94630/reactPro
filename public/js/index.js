@@ -51,7 +51,7 @@ import bee3 from './bee3.js';
 
 //bee.caseA9();
 //bee2.caseA1();
-l(bee3);
+//l(bee3);
 
 
 
