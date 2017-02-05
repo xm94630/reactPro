@@ -22755,6 +22755,7 @@ var bee = function (bee) {
         //直接使用 this.myFun 就可以解析解析到正确的上下文
         //我觉得原因是这样子的：这里的语法（在js中使用标签）本来就是需要额外的解析工具来解析的
         //所以在提取 this.myFun 已经帮你内部完成了上下文的绑定就不需要你自己来手动绑定了(不过上面案例不支持，好奇怪)
+        //我觉得可能是React.Component和createClass两种方法内部的this绑定策略是不同的。
         return React.createElement('input', { type: 'number', value: a, onChange: this.myFun });
 
         //用这个的时候，就会报错：道理已经说的很明白了！
@@ -22762,6 +22763,7 @@ var bee = function (bee) {
         //You are binding a component method to the component. 
         //React does this for you automatically in a high-performance way, 
         //so you can safely remove this call. See Fish
+
         //return <input type="number" value={a} onChange={this.myFun.bind(this)}/>;
       }
     });
